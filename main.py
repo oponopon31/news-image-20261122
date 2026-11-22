@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# news-image-20261122 v1 — rewritten in-session for transcript authorship; 35 stories, Sunday 22 November 2026
 """THE WORLD IN ONE DAY -- front page for Sunday 22 November 2026.
 
   news22 v1 (22 Nov 2026): 35 stories, all dated Sunday 22 November
