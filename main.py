@@ -1445,7 +1445,7 @@ STATS = [
     ("2", "INJURED IN THE", "BAHRAIN STRIKE"),
     ("36", "MISSING AFTER THE", "CIKANDE FACTORY FIRE"),
     ("14", "MISSING AFTER THE", "KYIV DRONE STRIKE"),
-    ("400", "DRONES IN THE OVERNIGHT", "BARRAGE ON UKRAINE"),
+    ("186", "DRONES IN THE OVERNIGHT", "BARRAGE ON UKRAINE"),
     ("720", "INDIA DECLARES AT", "720 FOR 9 VS NEW ZEALAND"),
     ("15", "KM SWUM ACROSS THE", "STRAIT OF HORMUZ"),
 ]
@@ -1493,10 +1493,10 @@ MID5 = [
          kicker="4 KYIV REGION - DRONE",
          head="Drone collapses Kyiv block",
          body="Five-storey block hit on Sunday; at least 14 missing. (Straits Times)"),
-    dict(pic=pic_riyadh, tag="BARRAGE", cap="REPORTED · AL JAZEERA",
+    dict(pic=pic_riyadh, tag="BARRAGE", cap="CONFIRMED · EUROMAIDAN PRESS",
          kicker="5 UKRAINE - BARRAGE",
-         head="400 drones hit Ukraine",
-         body="Overnight barrage kills at least eight, six in Kyiv. (Al Jazeera)"),
+         head="186 drones hit Ukraine",
+         body="Overnight raid: 186 Shahed drones, 161 downed, strikes at 18 sites. (Euromaidan Press)"),
     dict(pic=pic_globe, tag="SEOUL", cap="REPORTED · BBC",
          kicker="6 SEOUL - RESIGNATION",
          head="Seoul minister quits",
@@ -1581,7 +1581,7 @@ DATE_CHECK = ("DATE CHECK - LEFT OUT: EL CHAPO ISIDRO CAPTURE "
 FOOTER_1 = ("Every story here happened, or was first reported, on "
             "Sunday 22 November 2026.")
 FOOTER_2 = ("Sources: BBC · Reuters · AP · Al Jazeera · AFP · The Guardian · "
-            "CNN · France 24 · Euronews · Dainik Jagran · Straits Times · "
+            "CNN · France 24 · Euronews · Euromaidan Press · Dainik Jagran · Straits Times · "
             "FT · USGS · CISA · One Turn · Gardner - Original drawings")
 
 
