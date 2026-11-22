@@ -1,3 +1,9 @@
+[![make.fun](https://make.fun/badge/news-image-20261122.svg)](https://make.fun/bounty/news-image-20261122)
+[![rank](https://make.fun/badge/news-image-20261122/oponopon31/news-image-20261122/rank.svg)](https://make.fun/bounty/news-image-20261122)
+[![reward](https://make.fun/badge/news-image-20261122/oponopon31/news-image-20261122/reward.svg)](https://make.fun/bounty/news-image-20261122)
+
+https://make.fun/bounty/news-image-20261122
+
 # The World in One Day — Sunday 22 November 2026
 
 One image summing up the world's news of Sunday 22 November 2026.
