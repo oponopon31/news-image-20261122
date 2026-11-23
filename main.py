@@ -378,12 +378,12 @@ def fit_scale(txt, maxw, s_hi, s_lo=1.0, step=0.25):
 
 # -------------------------------------------------------------------- data
 NUMBERS = [
-    ("186", "DRONES OVER UKRAINE"),
-    ("161", "DOWNED BY AIR DEFENCE"),
-    ("35%", "CLEAN-ENERGY GOAL KEPT"),
-    ("$120BN", "ADAPTATION TARGET CUT"),
-    ("720/9", "INDIA'S RECORD TOTAL"),
-    ("856", "HONG KONG CANDIDATES"),
+    ("2", "INJURED IN THE BAHRAIN STRIKE"),
+    ("36", "MISSING AFTER THE CIKANDE FACTORY FIRE"),
+    ("14", "MISSING AFTER THE KYIV DRONE STRIKE"),
+    ("186", "OVERNIGHT DRONE BARRAGE ON UKRAINE"),
+    ("720", "INDIA DECLARES AT 720 FOR 9 VS NEW ZEALAND"),
+    ("15", "KM SWUM ACROSS THE STRAIT OF HORMUZ"),
 ]
 
 REGIONS = [
@@ -399,19 +399,17 @@ REGIONS = [
 # (num, place, topic, label lines, headline, body, status, scene)
 LEADS = [
     (1, "ANTALYA", "CLIMATE",
-     ["COP31", "FINAL TEXT"],
-     "COP31 final text lands at dawn",
-     "Final text keeps the 35% clean-electricity goal for 2035, drops "
-     "the $120bn adaptation target, never names fossil fuels. "
-     "(Reuters, BBC)",
+     ["COP31", "NO DEAL"],
+     "COP31 collapses with no deal",
+     "Antalya talks break down on Sunday after the EU rejects a fourth "
+     "draft with no mention of fossil fuels. (Reuters)",
      "CONFIRMED - REUTERS", "table"),
     (2, "SITRA, BAHRAIN", "STRIKE",
-     ["IRAN CLAIMS", "2 RADARS HIT"],
-     "Iran claims US radars hit; Bahrain denies",
-     "Tehran says it destroyed two Patriot radars; Bahrain says its "
-     "defences intercepted the attack, a site caught fire, no one "
-     "hurt. (Reuters)",
-     "CLAIM - REUTERS", "night"),
+     ["BAHRAIN", "MISSILES HIT SITRA"],
+     "Iran strikes Bahrain site",
+     "Bahrain says an Iranian strike on a civilian site in Sitra injured "
+     "two, one critically; Gulf states condemn it. (Reuters)",
+     "CONFIRMED - REUTERS", "night"),
     (3, "CIKANDE, INDONESIA", "FIRE",
      ["CIKANDE FIRE", "36 STILL MISSING"],
      "Factory fire kills three",
@@ -468,20 +466,20 @@ FEATURES = [
 ALSO = [
     (14, "SAUDI ARABIA", "HOUTHI FIRE ON SAUDI", "HANSEN", "CLAIM"),
     (15, "TEHRAN", "HORMUZ REOPENING NOT DIFFICULT", "JAGRAN", "REPORTED"),
-    (16, "GULF OF FINLAND", "SPARTA II ABLAZE, CREW RESCUED", "REUTERS", "REPORTED"),
+    (16, "SUDAN", "ARMY ADVANCES AFTER DEFECTIONS", "FT", "REPORTED"),
     (17, "MOSCOW", "DISSIDENT CHEMIST UGLEV DIES AT 80", "HT", "REPORTED"),
     (18, "GUATEMALA", "WANTED MEXICAN ARRESTED", "AP", "REPORTED"),
     (19, "BRASILIA", "LULA FISCAL VOTE NEARS IN CHAMBER", "SYNTHESIS", "REPORTED"),
     (20, "GENEVA", "UN ROBOT TALKS EXTENDED TO 2028", "HANSEN", "REPORTED"),
     (21, "WASHINGTON", "VCENTER FLAW EXPLOITED", "CISA", "REPORTED"),
-    (22, "HONG KONG", "856 CANDIDATES, 723 SEATS", "SCMP", "REPORTED"),
+    (22, "BACKSPACE", "SPOT BREACH EXPOSES SECRETS", "AP", "REPORTED"),
     (23, "GEORGIA", "MAN HELD OVER IS-LINKED TRANSFERS", "SPEARNET", "REPORTED"),
-    (24, "LAS VEGAS", "VERSTAPPEN WINS LAS VEGAS GP", "F1", "REPORTED"),
+    (24, "TEHRAN", "NEIGHBOURHOOD SURVEILLANCE GROWS", "SPEARNET", "REPORTED"),
     (25, "HORMUZ", "PUGH SWIMS 15 KM ACROSS STRAIT", "ONE TURN", "REPORTED"),
-    (26, "SAN ANTONIO", "WEMBANYAMA SCORES 50, SPURS WIN", "AP", "REPORTED"),
+    (26, "CALIFORNIA", "KING TIDES, BIGGEST WAVES IN YEARS", "GUARDIAN", "REPORTED"),
     (27, "WELLINGTON", "INDIA DECLARE 720 FOR 9 VS NZ", "JAGRAN", "REPORTED"),
     (28, "NEW DELHI", "CHAHAL JOINS BJP, GETS OBC POST", "JAGRAN", "REPORTED"),
-    (29, "MADRID", "ZVEREV V ALCARAZ IN ATP FINAL", "ATP", "REPORTED"),
+    (29, "NEW DELHI", "BJP MP WADKUTE DIES AT 72", "JAGRAN", "REPORTED"),
     (30, "ARUNACHAL", "INDIA-CHINA TALKS END", "JAGRAN", "REPORTED"),
     (31, "PARIS", "FRANCE BEAT TURKEY, INTO QUARTERS", "PULSE", "REPORTED"),
     (32, "PARIS", "FRANCE RUGBY BEAT ARGENTINA", "PULSE", "REPORTED"),
@@ -491,11 +489,14 @@ ALSO = [
 ]
 
 DATE_CHECK = (
-    "LEFT OUT, OTHER DAYS' NEWS: 400-drone night (Thu-Fri 20-21 Nov) "
-    "\u00b7 Peru quake (Fri 21 Nov) \u00b7 El Chapo Isidro capture "
-    "(Fri 20 Nov) \u00b7 BepiColombo Mercury arrival (Sat 21 Nov) "
-    "\u00b7 Nigeria boat capsize (Sat 21 Nov) \u00b7 ICJ Rohingya ruling "
-    "(Thu 19 Nov) \u00b7 Germany 5-0 Netherlands (Fri 20 Nov)"
+    "LEFT OUT: EL CHAPO ISIDRO CAPTURE (RAID FRI 20 NOV, REPORTED SAT 21 NOV) "
+    "\u00b7 EU-INDONESIA CEPA SIGNED (SAT 21 NOV, BRUSSELS) \u00b7 VENEZUELA-US "
+    "MILITARY DEAL (SIGNED WED 18 NOV, REPORTED FRI 20 NOV) \u00b7 NIGERIA BOAT "
+    "CAPSIZE, 24 DEAD (NEMA STATEMENT SAT 21 NOV) \u00b7 ICJ ROHINGYA GENOCIDE "
+    "RULING (THU 19 NOV) \u00b7 RIEMANN HYPOTHESIS CLAIM (FRI 20 NOV) \u00b7 TRUMP "
+    "CONTRACTOR ORDER (SIGNED FRI NIGHT, REPORTED SAT 21 NOV) \u00b7 GERMANY 5-0 "
+    "NETHERLANDS (FRI 20 NOV) \u00b7 COP31 OVERTIME DRAG (SAT 21 NOV - THE "
+    "COLLAPSE ITSELF IS SUN 22 NOV) \u00b7 PERU QUAKE (SAT 21 NOV - IN NEWS20)."
 )
 
 FOOTER_SOURCES = (
@@ -743,8 +744,8 @@ def build():
     draw_text(pg, rx - rw, 20, right, 2.0, INK, bold=True, track=-1)
     centre(pg, W // 2, 40, "Sunday 22 November 2026", 4.5, INK, bold=True)
     centre(pg, W // 2, 80,
-           "COP31 deal lands in Antalya \u00b7 Iran claims radar hits "
-           "\u00b7 Factory fire in Indonesia", 1.75, INK)
+           "COP31 collapses in Antalya \u00b7 Iran strikes Bahrain \u00b7 "
+           "Factory fire in Indonesia", 1.75, INK)
     pg.hline(mx, 96, rx - mx, INK, 3)
     pg.hline(mx, 101, rx - mx, INK, 1)
 
@@ -756,7 +757,7 @@ def build():
         if i:
             pg.vline(cx - 4, 106, 58, GREY, 1)
         centre(pg, cx + cell // 2, 118, num, 2.75, RED, bold=True)
-        para(pg, cx + 4, 141, label, 1.0, INK, cell - 10, lh=9, max_lines=1)
+        para(pg, cx + 4, 141, label, 1.0, INK, cell - 10, lh=9, max_lines=2)
 
     # ---- region bar
     ry, rh = 162, 16
@@ -820,8 +821,8 @@ def build():
     # ---- date check
     pg.frame(mx, 912, rx - mx, 60, RED, 2)
     draw_text(pg, mx + 6, 918, "DATE CHECK", 1.25, RED, bold=True)
-    para(pg, mx + 6, 930, DATE_CHECK, 1.25, INK, rx - mx - 12, lh=11,
-         max_lines=3)
+    para(pg, mx + 6, 932, DATE_CHECK, 1.0, INK, rx - mx - 12, lh=8,
+         max_lines=5)
 
     # ---- footer
     centre(pg, W // 2, 978,
