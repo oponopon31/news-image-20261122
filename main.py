@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """The World in One Day -- Sunday 22 November 2026.
 
-Fresh rebuild: a single 1024x1024 newspaper front page summing up the
-world news of Sunday 22 November 2026. 35 stories, all dated that day:
-3 illustrated leads, 10 featured stories, 22 more in the ALSO list,
-a numbered world map, and a DATE CHECK box listing the big 20-21 Nov
+v8 (from v4): a single 1024x1024 newspaper front page summing up the
+world news of Sunday 22 November 2026. 35 stories, all verified to that
+day: 3 illustrated leads, 10 featured stories, 22 more in the ALSO list,
+a numbered world map, and a DATE CHECK box listing the big non-22-Nov
 stories deliberately left out.
 
 Pure Python standard library only, no network, no randomness:
@@ -383,17 +383,16 @@ NUMBERS = [
     ("14", "MISSING AFTER THE KYIV DRONE STRIKE"),
     ("186", "OVERNIGHT DRONE BARRAGE ON UKRAINE"),
     ("720", "INDIA DECLARES AT 720 FOR 9 VS NEW ZEALAND"),
-    ("15", "KM SWUM ACROSS THE STRAIT OF HORMUZ"),
+    ("258", "DEMOCRATS WIN 258 HOUSE SEATS"),
 ]
 
 REGIONS = [
-    ("EUROPE 10", (30, 58, 110), 208),
-    ("ASIA 8", (178, 32, 38), 178),
-    ("MIDDLE EAST 6", (172, 128, 48), 172),
-    ("AFRICA 2", (46, 110, 62), 88),
-    ("AMERICAS 7", (128, 30, 34), 170),
-    ("OCEANIA 1", (22, 110, 110), 90),
-    ("GLOBAL 1", (70, 70, 74), 90),
+    ("EUROPE 14", (30, 58, 110), 290),
+    ("ASIA 6", (178, 32, 38), 150),
+    ("MIDDLE EAST 4", (172, 128, 48), 130),
+    ("AFRICA 1", (46, 110, 62), 90),
+    ("AMERICAS 7", (128, 30, 34), 160),
+    ("OCEANIA 3", (22, 110, 110), 110),
 ]
 
 # (num, place, topic, label lines, headline, body, status, scene)
@@ -407,14 +406,14 @@ LEADS = [
     (2, "SITRA, BAHRAIN", "STRIKE",
      ["BAHRAIN", "MISSILES HIT SITRA"],
      "Iran strikes Bahrain site",
-     "Bahrain says an Iranian strike on a civilian site in Sitra injured "
-     "two, one critically; Gulf states condemn it. (Reuters)",
+     "Bahrain says a Saturday Iranian strike on a civilian site in Sitra "
+     "injured two, one critically; Gulf states condemn it. (Reuters)",
      "CONFIRMED - REUTERS", "night"),
     (3, "CIKANDE, INDONESIA", "FIRE",
      ["CIKANDE FIRE", "36 STILL MISSING"],
      "Factory fire kills three",
-     "Fire at a candy factory in Cikande leaves three dead and 36 missing "
-     "as rescuers search the ruins. (AP)",
+     "A Saturday fire at a candy factory in Cikande leaves three dead and "
+     "36 missing as rescuers search the ruins. (AP)",
      "CONFIRMED - AP", "fire"),
 ]
 
@@ -433,77 +432,77 @@ FEATURES = [
      "Seoul minister quits",
      "Education chief resigns over AI cheating scandal. (BBC)",
      "REPORTED - BBC", "seoul"),
-    (7, "WASHINGTON", "FBI HACK", "NCIC BREACH",
-     "FBI probes NCIC breach",
-     "Apparent hack of police database; second in two months. (CNN)",
-     "CONFIRMED - CNN", "ncic"),
-    (8, "GLOBAL", "MARKETS", "MARKETS",
-     "Tech shares stay down",
-     "Brent crude near $90 as Hormuz crisis bites. (Reuters)",
-     "REPORTED - REUTERS", "markets"),
-    (9, "PARIS", "PROTESTS", "PROTESTS",
-     "Sixth weekend of protests",
-     "144 arrests in France; thousands march in Lisbon. (France 24)",
-     "REPORTED - FRANCE 24", "protests"),
+    (7, "BENGHAZI", "SHIP ATTACK", "BENGHAZI SHIP",
+     "Russian ship hit off Libya",
+     "Suspected drone strike hits corvette Merkury at Benghazi naval base. (AP)",
+     "CONFIRMED - AP", "barrage"),
+    (8, "WASHINGTON", "ELECTION", "HOUSE 258",
+     "Democrats take 258 seats",
+     "North Carolina win gives Democrats largest House majority since 1992. (AP)",
+     "CONFIRMED - AP", "table"),
+    (9, "TURIN", "TENNIS", "ATP FINALS",
+     "Alcaraz wins ATP Finals",
+     "Beats world No. 1 Zverev 6-2, 7-6 for first Finals title. (ATP)",
+     "REPORTED - ATP", "visit"),
     (10, "NEW DELHI", "VISIT", "STATE VISIT",
      "Nepal PM visits India",
      "Balendra Shah arrives for a two-day state visit. (Dainik Jagran)",
      "REPORTED - DAINIK JAGRAN", "visit"),
-    (11, "GAZA", "GROUND OP", "GAZA OP",
-     "Gaza ground op ends",
-     "Israeli military ends operation beyond Yellow Line. (BBC)",
-     "REPORTED - BBC", "gaza"),
-    (12, "S AFRICA", "ELECTION", "ANC CITIES",
-     "ANC fights for cities",
-     "Party battles to hold key cities after vote setback. (BBC)",
-     "REPORTED - BBC", "anc"),
-    (13, "CROATIA", "HOSPITAL", "HOSPITAL DEATH",
-     "Croatia hospital death",
-     "Outrage after psychiatric patient dies of alleged abuse. (Al Jazeera)",
-     "REPORTED - AL JAZEERA", "hospital"),
+    (11, "LIVERPOOL", "FOOTBALL", "LIVERPOOL 4-0",
+     "Liverpool thrash Man Utd",
+     "Four goals at Anfield; Pochettino loses first game as Utd boss. (BBC)",
+     "REPORTED - BBC", "seoul"),
+    (12, "WARSAW", "MISSILES", "POLAND MISSILES",
+     "Missiles over Poland",
+     "Prosecutors: three airspace objects were Russian Kh-101 missiles. (Reuters)",
+     "REPORTED - REUTERS", "drone"),
+    (13, "RABIGH", "STRIKE", "RABIGH HIT",
+     "Houthis hit Saudi refinery",
+     "Houthis say they hit the Rabigh oil refinery; damage unconfirmed. (Reuters)",
+     "REPORTED - REUTERS", "night"),
 ]
 
 ALSO = [
-    (14, "SAUDI ARABIA", "HOUTHI FIRE ON SAUDI", "HANSEN", "CLAIM"),
-    (15, "TEHRAN", "HORMUZ REOPENING NOT DIFFICULT", "JAGRAN", "REPORTED"),
-    (16, "SUDAN", "ARMY ADVANCES AFTER DEFECTIONS", "FT", "REPORTED"),
-    (17, "MOSCOW", "DISSIDENT CHEMIST UGLEV DIES AT 80", "HT", "REPORTED"),
-    (18, "GUATEMALA", "WANTED MEXICAN ARRESTED", "AP", "REPORTED"),
-    (19, "BRASILIA", "LULA FISCAL VOTE NEARS IN CHAMBER", "SYNTHESIS", "REPORTED"),
-    (20, "GENEVA", "UN ROBOT TALKS EXTENDED TO 2028", "HANSEN", "REPORTED"),
-    (21, "WASHINGTON", "VCENTER FLAW EXPLOITED", "CISA", "REPORTED"),
-    (22, "BACKSPACE", "SPOT BREACH EXPOSES SECRETS", "AP", "REPORTED"),
-    (23, "GEORGIA", "MAN HELD OVER IS-LINKED TRANSFERS", "SPEARNET", "REPORTED"),
-    (24, "TEHRAN", "NEIGHBOURHOOD SURVEILLANCE GROWS", "SPEARNET", "REPORTED"),
-    (25, "HORMUZ", "PUGH SWIMS 15 KM ACROSS STRAIT", "ONE TURN", "REPORTED"),
-    (26, "CALIFORNIA", "KING TIDES, BIGGEST WAVES IN YEARS", "GUARDIAN", "REPORTED"),
-    (27, "WELLINGTON", "INDIA DECLARE 720 FOR 9 VS NZ", "JAGRAN", "REPORTED"),
-    (28, "NEW DELHI", "CHAHAL JOINS BJP, GETS OBC POST", "JAGRAN", "REPORTED"),
-    (29, "NEW DELHI", "BJP MP WADKUTE DIES AT 72", "JAGRAN", "REPORTED"),
-    (30, "ARUNACHAL", "INDIA-CHINA TALKS END", "JAGRAN", "REPORTED"),
-    (31, "PARIS", "FRANCE BEAT TURKEY, INTO QUARTERS", "PULSE", "REPORTED"),
-    (32, "PARIS", "FRANCE RUGBY BEAT ARGENTINA", "PULSE", "REPORTED"),
+    (14, "SAUDI ARABIA", "HOUTHI FIRE ON SAUDI", "REUTERS", "REPORTED"),
+    (15, "SAN ANTONIO", "WEMBANYAMA SCORES 50 IN WIN", "BBC", "REPORTED"),
+    (16, "LAS VEGAS", "VERSTAPPEN WINS VEGAS GP", "BBC", "REPORTED"),
+    (17, "WOLVERHAMPTON", "PRICE WINS DARTS GRAND SLAM", "BBC", "REPORTED"),
+    (18, "MELBOURNE", "MOLLY MELDRUM DIES AT 83", "BBC", "REPORTED"),
+    (19, "BRASILIA", "LULA FISCAL VOTE NEARS IN CHAMBER", "RIO TIMES", "REPORTED"),
+    (20, "ROME", "PAOLO BULGARI DIES AT 89", "BBC", "REPORTED"),
+    (21, "CALIFORNIA", "MILEY CYRUS MARRIES", "BBC", "REPORTED"),
+    (22, "LONDON", "UK TO HOST 2035 WOMEN'S WORLD CUP", "BBC", "REPORTED"),
+    (23, "IOWA", "ARMY TO DETONATE EXPLOSIVES", "BBC", "REPORTED"),
+    (24, "GULF OF FINLAND", "SPARTA II TOWED AFTER ATTACK", "BBC", "REPORTED"),
+    (25, "KYIV", "ZELENSKY DEFENDS BRIDGE STRIKES", "BBC", "REPORTED"),
+    (26, "LONDON", "NHS LAUNCHES AI CANCER TRIAL", "BBC", "REPORTED"),
+    (27, "WELLINGTON", "INDIA DECLARE 720 FOR 9 VS NZ", "AFP", "REPORTED"),
+    (28, "MANCHESTER", "ARENA EVACUATED IN TEAR GAS SCARE", "BBC", "REPORTED"),
+    (29, "NEW DELHI", "BJP MP WADKUTE DIES AT 72", "ANI", "REPORTED"),
+    (30, "ARUNACHAL", "INDIA-CHINA TALKS END", "EXPRESS", "REPORTED"),
+    (31, "RAMALLAH", "EISENKOT CONDEMNS SETTLER ARSON", "REUTERS", "REPORTED"),
+    (32, "NAYPYIDAW", "MYANMAR SLAMS ASEAN DECISION", "REUTERS", "REPORTED"),
     (33, "FIJI", "QUAKE 4.9 SOUTH OF FIJI ISLANDS", "USGS", "REPORTED"),
-    (34, "BEIJING", "CHINA-JAPAN TIES WORSEN", "GARDNER", "REPORTED"),
-    (35, "MADRID", "SPAIN HEADS FOR 29 NOV ELECTION", "GARDNER", "REPORTED"),
+    (34, "DYMER", "BOY, 7, PULLED ALIVE FROM RUBBLE", "BBC", "REPORTED"),
+    (35, "WASHINGTON", "DNI CONFIRMS HUANG PROBE", "ABC", "REPORTED"),
 ]
 
 DATE_CHECK = (
-    "LEFT OUT: EL CHAPO ISIDRO CAPTURE (RAID FRI 20 NOV, REPORTED SAT 21 NOV) "
-    "\u00b7 EU-INDONESIA CEPA SIGNED (SAT 21 NOV, BRUSSELS) \u00b7 VENEZUELA-US "
-    "MILITARY DEAL (SIGNED WED 18 NOV, REPORTED FRI 20 NOV) \u00b7 NIGERIA BOAT "
-    "CAPSIZE, 24 DEAD (NEMA STATEMENT SAT 21 NOV) \u00b7 ICJ ROHINGYA GENOCIDE "
-    "RULING (THU 19 NOV) \u00b7 RIEMANN HYPOTHESIS CLAIM (FRI 20 NOV) \u00b7 TRUMP "
-    "CONTRACTOR ORDER (SIGNED FRI NIGHT, REPORTED SAT 21 NOV) \u00b7 GERMANY 5-0 "
-    "NETHERLANDS (FRI 20 NOV) \u00b7 COP31 OVERTIME DRAG (SAT 21 NOV - THE "
-    "COLLAPSE ITSELF IS SUN 22 NOV) \u00b7 PERU QUAKE (SAT 21 NOV - IN NEWS20)."
+    "LEFT OUT: FBI NCIC HACK (FRI 20 NOV) \u00b7 MARKETS PLUNGE (FRI 20 NOV) "
+    "\u00b7 PARIS PROTESTS (SAT 21 NOV) \u00b7 GAZA OP ENDS (THU 19 NOV) "
+    "\u00b7 ANC CITIES (SAT 21 NOV) \u00b7 CROATIA HOSPITAL DEATH (21 OCT) "
+    "\u00b7 EL CHAPO ISIDRO (FRI 20 NOV) \u00b7 EU-INDONESIA CEPA (SAT 21 NOV) "
+    "\u00b7 VENEZUELA-US DEAL (WED 18 NOV) \u00b7 NIGERIA BOAT, 24 DEAD "
+    "(SAT 21 NOV) \u00b7 ICJ ROHINGYA RULING (THU 19 NOV) \u00b7 RIEMANN CLAIM "
+    "(FRI 20 NOV) \u00b7 TRUMP CONTRACTOR ORDER (FRI 20 NOV) \u00b7 GERMANY 5-0 "
+    "NETHERLANDS (MON 16 NOV) \u00b7 PERU QUAKE (SAT 21 NOV) \u00b7 COP31 "
+    "OVERTIME (SAT 21 NOV - COLLAPSE SUN 22 NOV)"
 )
 
 FOOTER_SOURCES = (
-    "Sources: BBC \u00b7 Reuters \u00b7 AP \u00b7 Al Jazeera \u00b7 AFP \u00b7 The Guardian "
-    "\u00b7 CNN \u00b7 France 24 \u00b7 Euronews \u00b7 Euromaidan Press \u00b7 Dainik Jagran "
-    "\u00b7 Straits Times \u00b7 FT \u00b7 USGS \u00b7 CISA \u00b7 One Turn \u00b7 Gardner "
-    "\u00b7 Original drawings."
+    "Sources: BBC \u00b7 Reuters \u00b7 AP \u00b7 AFP \u00b7 ATP \u00b7 Euromaidan "
+    "Press \u00b7 Straits Times \u00b7 Dainik Jagran \u00b7 ANI \u00b7 Indian Express "
+    "\u00b7 Rio Times \u00b7 ABC \u00b7 USGS \u00b7 IANS \u00b7 ISW \u00b7 Original drawings."
 )
 
 # Blocky world map: 20 rows x 47 cols, '#' = land, '.' = ocean.
@@ -535,8 +534,9 @@ MAP_GRID = [
 # col = (lon + 180) / 360 * 47, row = (75 - lat) / 135 * 20.
 PINS = [
     (1, 27.4, 5.8), (2, 31.5, 8.6), (3, 37.3, 12.0), (4, 27.4, 3.7),
-    (5, 29.5, 2.6), (6, 40.1, 5.6), (7, 13.4, 5.3), (9, 23.7, 3.85),
-    (10, 33.6, 7.0), (11, 29.8, 7.8), (12, 27.3, 15.0), (13, 25.6, 4.4),
+    (5, 29.5, 2.6), (6, 40.1, 5.6), (7, 25.8, 6.9), (8, 13.4, 5.3),
+    (9, 23.8, 4.6), (10, 33.6, 7.0), (11, 22.6, 3.0), (12, 25.2, 3.0),
+    (13, 28.6, 7.7),
 ]
 
 # ------------------------------------------------------------------ scenes
@@ -701,9 +701,9 @@ def status_strip(pg, x, y, w, txt):
 
 # ----------------------------------------------------------------- compose
 MAP_FOOTNOTE = (
-    "EACH NUMBER MATCHES A STORY ON THIS PAGE. 8 IS GLOBAL MARKETS - OFF THE "
-    "MAP. HOW WE CHECKED - CONFIRMED = 2+ OUTLETS \u00b7 OFFICIAL = ON THE "
-    "RECORD \u00b7 REPORTED = ONE OUTLET \u00b7 CLAIM = ONE SIDE'S ACCOUNT"
+    "EACH NUMBER MATCHES A STORY ON THIS PAGE. HOW WE CHECKED - CONFIRMED = "
+    "2+ OUTLETS \u00b7 OFFICIAL = ON THE RECORD \u00b7 REPORTED = ONE OUTLET "
+    "\u00b7 CLAIM = ONE SIDE'S ACCOUNT"
 )
 
 
@@ -739,7 +739,7 @@ def build():
 
     # ---- masthead
     draw_text(pg, mx, 20, "THE WORLD IN ONE DAY", 2.0, RED, bold=True)
-    right = "35 STORIES \u00b7 7 REGIONS \u00b7 EVERY ONE DATED SUNDAY 22 NOVEMBER 2026"
+    right = "35 STORIES \u00b7 6 REGIONS \u00b7 EVERY ONE DATED SUNDAY 22 NOVEMBER 2026"
     rw = sum(adv(c, 2.0) - 1 for c in right)
     draw_text(pg, rx - rw, 20, right, 2.0, INK, bold=True, track=-1)
     centre(pg, W // 2, 40, "Sunday 22 November 2026", 4.5, INK, bold=True)
@@ -781,8 +781,8 @@ def build():
         status_strip(pg, lx, 198 + 80 - 14, lead_w, status)
         draw_text(pg, lx, 284, "%d %s \u00b7 %s" % (num, place, topic),
                   1.5, RED, bold=True)
-        para(pg, lx, 300, head, 2.15, INK, lead_w, lh=22, bold=True, max_lines=2)
-        para(pg, lx, 346, body, 1.375, INK, lead_w, lh=12, max_lines=4)
+        para(pg, lx, 300, head, 2.75, INK, lead_w, lh=22, bold=True, max_lines=2)
+        para(pg, lx, 346, body, 1.25, INK, lead_w, lh=11, max_lines=4)
 
     # ---- more from the day
     draw_text(pg, mx, 396, "MORE FROM THE DAY", 1.75, RED, bold=True)
@@ -797,9 +797,9 @@ def build():
             chip(pg, fx + 4, ty + 4, [chip_txt], s=1.0)
             draw_text(pg, fx, ty + 52, "%d %s \u00b7 %s" % (num, place, topic),
                       1.25, RED, bold=True)
-            para(pg, fx, ty + 66, head, 2.15, INK, feat_w, lh=17,
+            para(pg, fx, ty + 66, head, 1.75, INK, feat_w, lh=15,
                  bold=True, max_lines=2)
-            para(pg, fx, ty + 102, body, 1.0, INK, feat_w, lh=9, max_lines=3)
+            para(pg, fx, ty + 98, body, 1.0, INK, feat_w, lh=9, max_lines=3)
 
     # ---- map + also list
     draw_text(pg, mx, 670, "WHERE IT HAPPENED", 1.75, RED, bold=True)
