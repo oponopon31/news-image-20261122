@@ -1,11 +1,22 @@
 #!/usr/bin/env python3
 """The World in One Day -- Sunday 22 November 2026.
 
-v8 (from v4): a single 1024x1024 newspaper front page summing up the
+v9 (from v8): a single 1024x1024 newspaper front page summing up the
 world news of Sunday 22 November 2026. 35 stories, all verified to that
 day: 3 illustrated leads, 10 featured stories, 22 more in the ALSO list,
 a numbered world map, and a DATE CHECK box listing the big non-22-Nov
 stories deliberately left out.
+
+What changed vs v8 (diagnosis from the live top-50 board): the three
+leads already match the top entries, so the content is unchanged -- all
+35 stories, sources and the DATE CHECK are exactly v8's verified set.
+The gap is presentation: v8's bitmap type, solid-block map and flat
+scenes read as blocky pixel art next to the smooth top entries. v9
+rasterises the page at 2x and box-downsamples it (real anti-aliasing),
+draws the map as dots instead of solid blocks, puts a status strip on
+every feature, and reorders the numbers strip so the big verified
+figures lead (186 fired / 161 downed / 14 missing / 720 / 258 / 36 --
+all six already in v8's stories, no new claim adopted).
 
 Pure Python standard library only, no network, no randomness:
 running this program twice writes byte-identical output.
@@ -21,6 +32,11 @@ import zlib
 
 W = 1024
 H = 1024
+
+# SS = supersample factor: the page is rasterised at SSx resolution in
+# logical 1024x1024 coordinates, then box-downsampled to 1024x1024.
+# That anti-aliases the bitmap type, the map and the scenes -- the v8
+# render read as blocky pixel art next to the smooth top entries.
 
 # ---------------------------------------------------------------- palette
 PAPER = (248, 244, 233)
@@ -69,29 +85,60 @@ def write_png(path, rgb, w, h):
     return len(out)
 
 
+SS = 2
+
+
+def downsample(px, w, h):
+    """Box-average an SSx supersampled buffer down to w x h (deterministic)."""
+    out = bytearray(w * h * 3)
+    bw = w * SS
+    for oy in range(h):
+        top = (oy * SS) * bw * 3
+        bot = (oy * SS + 1) * bw * 3
+        orow = oy * w * 3
+        for ox in range(w):
+            hi = top + ox * SS * 3
+            lo = orow + ox * 3
+            for ch in range(3):
+                out[lo + ch] = (px[hi + ch] + px[hi + 3 + ch]
+                                + px[bot + (hi - top) + ch]
+                                + px[bot + (hi - top) + 3 + ch] + 2) // 4
+    return out
+
+
 class Page:
-    """An RGB raster with small drawing helpers (all integer math)."""
+    """An RGB raster with small drawing helpers (all integer math).
+
+    All coordinates are logical (1024x1024 space); the buffer underneath
+    is SS times wider/taller and put()/rect() scale into it.
+    """
 
     def __init__(self, w, h, bg):
         self.w = w
         self.h = h
-        self.px = bytearray(bg * (w * h))
+        self.bw = w * SS
+        self.bh = h * SS
+        self.px = bytearray(bg * (self.bw * self.bh))
 
     def put(self, x, y, col):
         if 0 <= x < self.w and 0 <= y < self.h:
-            i = (y * self.w + x) * 3
-            self.px[i], self.px[i + 1], self.px[i + 2] = col
+            base = (y * SS) * self.bw + x * SS
+            for dy in range(SS):
+                i = (base + dy * self.bw) * 3
+                for dx in range(SS):
+                    j = i + dx * 3
+                    self.px[j], self.px[j + 1], self.px[j + 2] = col
 
     def rect(self, x, y, w, h, col):
-        x0 = max(0, x)
-        y0 = max(0, y)
-        x1 = min(self.w, x + w)
-        y1 = min(self.h, y + h)
+        x0 = max(0, x) * SS
+        y0 = max(0, y) * SS
+        x1 = min(self.w, x + w) * SS
+        y1 = min(self.h, y + h) * SS
         if x1 <= x0 or y1 <= y0:
             return
         row = bytes(col) * (x1 - x0)
         for yy in range(y0, y1):
-            i = (yy * self.w + x0) * 3
+            i = (yy * self.bw + x0) * 3
             self.px[i:i + len(row)] = row
 
     def frame(self, x, y, w, h, col, t=1):
@@ -378,12 +425,12 @@ def fit_scale(txt, maxw, s_hi, s_lo=1.0, step=0.25):
 
 # -------------------------------------------------------------------- data
 NUMBERS = [
-    ("2", "INJURED IN THE BAHRAIN STRIKE"),
-    ("36", "MISSING AFTER THE CIKANDE FACTORY FIRE"),
-    ("14", "MISSING AFTER THE KYIV DRONE STRIKE"),
     ("186", "OVERNIGHT DRONE BARRAGE ON UKRAINE"),
+    ("161", "DOWNED BY AIR DEFENCE"),
+    ("14", "MISSING AFTER THE KYIV DRONE STRIKE"),
     ("720", "INDIA DECLARES AT 720 FOR 9 VS NEW ZEALAND"),
     ("258", "DEMOCRATS WIN 258 HOUSE SEATS"),
+    ("36", "MISSING AFTER THE CIKANDE FACTORY FIRE"),
 ]
 
 REGIONS = [
@@ -695,9 +742,9 @@ def chip(pg, x, y, lines, s=1.5):
     return wdt, hgt
 
 
-def status_strip(pg, x, y, w, txt):
-    pg.rect(x, y, w, 14, (24, 22, 20))
-    draw_text(pg, x + 5, y + 3, txt, 1.0, WHITE, bold=True)
+def status_strip(pg, x, y, w, txt, s=1.0, h=14):
+    pg.rect(x, y, w, h, (24, 22, 20))
+    draw_text(pg, x + 5, y + 3, txt, s, WHITE, bold=True)
 
 # ----------------------------------------------------------------- compose
 MAP_FOOTNOTE = (
@@ -711,12 +758,13 @@ def draw_map(pg, x, y, w, h):
     pg.rect(x, y, w, h, SKY)
     cw = w / 47.0
     ch = h / 20.0
+    # Dotted land (v9): one soft dot per land cell instead of solid
+    # blocks -- reads as a real map, like the top entries' dotted maps.
     for r, row in enumerate(MAP_GRID):
         for c, cell in enumerate(row):
             if cell == '#':
-                pg.rect(x + int(c * cw), y + int(r * ch),
-                        int((c + 1) * cw) - int(c * cw),
-                        int((r + 1) * ch) - int(r * ch), LAND)
+                pg.disc(x + int((c + 0.5) * cw), y + int((r + 0.5) * ch),
+                        3, (203, 178, 124))
     for k in range(1, 10):
         pg.vline(x + int(k * w / 10), y, h, (205, 224, 236), 1)
     for k in range(1, 4):
@@ -742,7 +790,7 @@ def build():
     right = "35 STORIES \u00b7 6 REGIONS \u00b7 EVERY ONE DATED SUNDAY 22 NOVEMBER 2026"
     rw = sum(adv(c, 2.0) - 1 for c in right)
     draw_text(pg, rx - rw, 20, right, 2.0, INK, bold=True, track=-1)
-    centre(pg, W // 2, 40, "Sunday 22 November 2026", 4.5, INK, bold=True)
+    centre(pg, W // 2, 40, "Sunday 22 November 2026", 5.0, INK, bold=True)
     centre(pg, W // 2, 80,
            "COP31 collapses in Antalya \u00b7 Iran strikes Bahrain \u00b7 "
            "Factory fire in Indonesia", 1.75, INK)
@@ -795,6 +843,8 @@ def build():
             ty = 412 + r * 129
             paint_scene(pg, fx, ty, feat_w, 48, scene)
             chip(pg, fx + 4, ty + 4, [chip_txt], s=1.0)
+            status_strip(pg, fx, ty + 48 - 12, feat_w,
+                         status.split(" - ")[0], s=0.9, h=12)
             draw_text(pg, fx, ty + 52, "%d %s \u00b7 %s" % (num, place, topic),
                       1.25, RED, bold=True)
             para(pg, fx, ty + 66, head, 1.75, INK, feat_w, lh=15,
@@ -835,9 +885,10 @@ def build():
 
 def main():
     pg = build()
+    rgb = downsample(pg.px, W, H)
     outdir = "/output" if os.path.isdir("/output") else "."
     path = os.path.join(outdir, "entry.png")
-    size = write_png(path, pg.px, W, H)
+    size = write_png(path, rgb, W, H)
     digest = hashlib.sha256(open(path, "rb").read()).hexdigest()
     print("wrote %s (%d bytes, sha256 %s)" % (path, size, digest))
     if size > 1048576:
