@@ -757,7 +757,7 @@ def build():
         if i:
             pg.vline(cx - 4, 106, 58, GREY, 1)
         centre(pg, cx + cell // 2, 118, num, 2.75, RED, bold=True)
-        para(pg, cx + 4, 141, label, 1.0, INK, cell - 10, lh=9, max_lines=2, bold=True)
+        para(pg, cx + 4, 141, label, 1.0, INK, cell - 10, lh=9, max_lines=2)
 
     # ---- region bar
     ry, rh = 162, 16
@@ -780,9 +780,9 @@ def build():
         chip(pg, lx + 6, 204, label, s=1.5)
         status_strip(pg, lx, 198 + 80 - 14, lead_w, status)
         draw_text(pg, lx, 284, "%d %s \u00b7 %s" % (num, place, topic),
-                  1.75, RED, bold=True)
-        para(pg, lx, 300, head, 2.75, INK, lead_w, lh=21, bold=True, max_lines=2)
-        para(pg, lx, 342, body, 1.5, INK, lead_w, lh=13, bold=True, max_lines=4)
+                  1.25, RED, bold=True)
+        para(pg, lx, 300, head, 2.0, INK, lead_w, lh=18, bold=True, max_lines=2)
+        para(pg, lx, 346, body, 1.125, INK, lead_w, lh=11, max_lines=4)
 
     # ---- more from the day
     draw_text(pg, mx, 396, "MORE FROM THE DAY", 1.75, RED, bold=True)
@@ -795,22 +795,18 @@ def build():
             ty = 412 + r * 129
             paint_scene(pg, fx, ty, feat_w, 48, scene)
             chip(pg, fx + 4, ty + 4, [chip_txt], s=1.0)
-            kicker = "%d %s \u00b7 %s" % (num, place, topic)
-            draw_text(pg, fx, ty + 52, kicker,
-                      fit_scale(kicker, feat_w, 1.5, 1.25, step=0.125),
-                      RED, bold=True)
-            para(pg, fx, ty + 66, head, 1.75, INK, feat_w, lh=15,
+            draw_text(pg, fx, ty + 52, "%d %s \u00b7 %s" % (num, place, topic),
+                      1.25, RED, bold=True)
+            para(pg, fx, ty + 66, head, 2.0, INK, feat_w, lh=15,
                  bold=True, max_lines=2)
-            para(pg, fx, ty + 98, body, 1.0, INK, feat_w, lh=9, bold=True,
-                 max_lines=3)
+            para(pg, fx, ty + 98, body, 1.125, INK, feat_w, lh=10, max_lines=3)
 
     # ---- map + also list
     draw_text(pg, mx, 670, "WHERE IT HAPPENED", 1.75, RED, bold=True)
     draw_text(pg, 506, 670, "ALSO ON SUNDAY 22 NOVEMBER - 22 MORE STORIES",
               1.5, INK, bold=True)
     draw_map(pg, mx, 686, 470, 190)
-    para(pg, mx, 882, MAP_FOOTNOTE, 1.0, INK, 470, lh=8, bold=True,
-         max_lines=3)
+    para(pg, mx, 882, MAP_FOOTNOTE, 1.0, INK, 470, lh=8, max_lines=3)
     for col in range(2):
         lx = 506 + col * 250
         yy = 686
@@ -818,7 +814,7 @@ def build():
             num, place, head, src, status = item
             txt = "%d %s - %s (%s) - %s" % (num, place, head, src, status)
             for ln in wrap(txt, 0.9, 242):
-                draw_text(pg, lx, yy, ln, 0.9, INK, bold=True)
+                draw_text(pg, lx, yy, ln, 0.9, INK)
                 yy += 8
             yy += 1
 
@@ -826,14 +822,14 @@ def build():
     pg.frame(mx, 912, rx - mx, 60, RED, 2)
     draw_text(pg, mx + 6, 918, "DATE CHECK", 1.25, RED, bold=True)
     para(pg, mx + 6, 932, DATE_CHECK, 1.0, INK, rx - mx - 12, lh=8,
-         bold=True, max_lines=5)
+         max_lines=5)
 
     # ---- footer
     centre(pg, W // 2, 978,
            "Every story here happened, or was first reported, on Sunday "
-           "22 November 2026.", 1.25, INK, bold=True)
+           "22 November 2026.", 1.25, INK)
     for i, ln in enumerate(wrap(FOOTER_SOURCES, 1.0, rx - mx)):
-        centre(pg, W // 2, 992 + i * 8, ln, 1.0, GREY, bold=True)
+        centre(pg, W // 2, 992 + i * 8, ln, 1.0, GREY)
     return pg
 
 
