@@ -780,9 +780,9 @@ def build():
         chip(pg, lx + 6, 204, label, s=1.5)
         status_strip(pg, lx, 198 + 80 - 14, lead_w, status)
         draw_text(pg, lx, 284, "%d %s \u00b7 %s" % (num, place, topic),
-                  1.25, RED, bold=True)
-        para(pg, lx, 300, head, 2.0, INK, lead_w, lh=18, bold=True, max_lines=2)
-        para(pg, lx, 346, body, 1.125, INK, lead_w, lh=11, max_lines=4)
+                  1.5, RED, bold=True)
+        para(pg, lx, 300, head, 2.15, INK, lead_w, lh=22, bold=True, max_lines=2)
+        para(pg, lx, 346, body, 1.375, INK, lead_w, lh=12, max_lines=4)
 
     # ---- more from the day
     draw_text(pg, mx, 396, "MORE FROM THE DAY", 1.75, RED, bold=True)
@@ -797,9 +797,9 @@ def build():
             chip(pg, fx + 4, ty + 4, [chip_txt], s=1.0)
             draw_text(pg, fx, ty + 52, "%d %s \u00b7 %s" % (num, place, topic),
                       1.25, RED, bold=True)
-            para(pg, fx, ty + 66, head, 2.0, INK, feat_w, lh=15,
+            para(pg, fx, ty + 66, head, 2.15, INK, feat_w, lh=17,
                  bold=True, max_lines=2)
-            para(pg, fx, ty + 98, body, 1.125, INK, feat_w, lh=10, max_lines=3)
+            para(pg, fx, ty + 102, body, 1.0, INK, feat_w, lh=9, max_lines=3)
 
     # ---- map + also list
     draw_text(pg, mx, 670, "WHERE IT HAPPENED", 1.75, RED, bold=True)
